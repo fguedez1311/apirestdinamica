@@ -1,0 +1,69 @@
+[25-Dec-2024 22:35:58 UTC] PHP Fatal error:  Uncaught ArgumentCountError: PDO::__construct() expects at least 1 argument, 0 given in C:\apache\htdocs\apirest-dinamica\models\connection.php:20
+Stack trace:
+#0 C:\apache\htdocs\apirest-dinamica\models\connection.php(20): PDO->__construct()
+#1 C:\apache\htdocs\apirest-dinamica\index.php(12): Connection::connect()
+#2 {main}
+  thrown in C:\apache\htdocs\apirest-dinamica\models\connection.php on line 20
+[25-Dec-2024 22:35:58 UTC] PHP Fatal error:  Uncaught ArgumentCountError: PDO::__construct() expects at least 1 argument, 0 given in C:\apache\htdocs\apirest-dinamica\models\connection.php:20
+Stack trace:
+#0 C:\apache\htdocs\apirest-dinamica\models\connection.php(20): PDO->__construct()
+#1 C:\apache\htdocs\apirest-dinamica\index.php(12): Connection::connect()
+#2 {main}
+  thrown in C:\apache\htdocs\apirest-dinamica\models\connection.php on line 20
+[29-Dec-2024 22:46:23 UTC] PHP Warning:  Undefined variable $routerArray in C:\apache\htdocs\apirest-dinamica\routes\services\get.php on line 3
+[29-Dec-2024 22:46:23 UTC] PHP Warning:  Trying to access array offset on null in C:\apache\htdocs\apirest-dinamica\routes\services\get.php on line 3
+[29-Dec-2024 22:46:23 UTC] PHP Deprecated:  explode(): Passing null to parameter #2 ($string) of type string is deprecated in C:\apache\htdocs\apirest-dinamica\routes\services\get.php on line 3
+[29-Dec-2024 22:47:27 UTC] PHP Warning:  Undefined variable $routerArray in C:\apache\htdocs\apirest-dinamica\routes\services\get.php on line 3
+[29-Dec-2024 22:47:27 UTC] PHP Warning:  Trying to access array offset on null in C:\apache\htdocs\apirest-dinamica\routes\services\get.php on line 3
+[29-Dec-2024 22:47:27 UTC] PHP Deprecated:  explode(): Passing null to parameter #2 ($string) of type string is deprecated in C:\apache\htdocs\apirest-dinamica\routes\services\get.php on line 3
+[29-Dec-2024 22:47:58 UTC] PHP Warning:  Undefined variable $routersArray in C:\apache\htdocs\apirest-dinamica\routes\services\get.php on line 3
+[29-Dec-2024 22:47:58 UTC] PHP Warning:  Trying to access array offset on null in C:\apache\htdocs\apirest-dinamica\routes\services\get.php on line 3
+[29-Dec-2024 22:47:58 UTC] PHP Deprecated:  explode(): Passing null to parameter #2 ($string) of type string is deprecated in C:\apache\htdocs\apirest-dinamica\routes\services\get.php on line 3
+[30-Dec-2024 01:36:17 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY093]: Invalid parameter number: parameter was not defined in C:\apache\htdocs\apirest-dinamica\models\get.model.php:23
+Stack trace:
+#0 C:\apache\htdocs\apirest-dinamica\models\get.model.php(23): PDOStatement->execute()
+#1 C:\apache\htdocs\apirest-dinamica\controllers\get.controller.php(18): GetModel::getDataFilter()
+#2 C:\apache\htdocs\apirest-dinamica\routes\services\get.php(12): GetController::getDataFilter()
+#3 C:\apache\htdocs\apirest-dinamica\routes\routes.php(29): include('...')
+#4 C:\apache\htdocs\apirest-dinamica\controllers\routes.controller.php(5): include('...')
+#5 C:\apache\htdocs\apirest-dinamica\index.php(14): RoutesController->index()
+#6 {main}
+  thrown in C:\apache\htdocs\apirest-dinamica\models\get.model.php on line 23
+[30-Dec-2024 01:40:05 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method GetModel::getDataFilter() in C:\apache\htdocs\apirest-dinamica\controllers\get.controller.php:18
+Stack trace:
+#0 C:\apache\htdocs\apirest-dinamica\routes\services\get.php(12): GetController::getDataFilter()
+#1 C:\apache\htdocs\apirest-dinamica\routes\routes.php(29): include('...')
+#2 C:\apache\htdocs\apirest-dinamica\controllers\routes.controller.php(5): include('...')
+#3 C:\apache\htdocs\apirest-dinamica\index.php(14): RoutesController->index()
+#4 {main}
+  thrown in C:\apache\htdocs\apirest-dinamica\controllers\get.controller.php on line 18
+[30-Dec-2024 01:40:41 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY093]: Invalid parameter number: parameter was not defined in C:\apache\htdocs\apirest-dinamica\models\get.model.php:23
+Stack trace:
+#0 C:\apache\htdocs\apirest-dinamica\models\get.model.php(23): PDOStatement->execute()
+#1 C:\apache\htdocs\apirest-dinamica\controllers\get.controller.php(18): GetModel::getModelFilter()
+#2 C:\apache\htdocs\apirest-dinamica\routes\services\get.php(12): GetController::getDataFilter()
+#3 C:\apache\htdocs\apirest-dinamica\routes\routes.php(29): include('...')
+#4 C:\apache\htdocs\apirest-dinamica\controllers\routes.controller.php(5): include('...')
+#5 C:\apache\htdocs\apirest-dinamica\index.php(14): RoutesController->index()
+#6 {main}
+  thrown in C:\apache\htdocs\apirest-dinamica\models\get.model.php on line 23
+[30-Dec-2024 01:42:58 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY093]: Invalid parameter number: parameter was not defined in C:\apache\htdocs\apirest-dinamica\models\get.model.php:23
+Stack trace:
+#0 C:\apache\htdocs\apirest-dinamica\models\get.model.php(23): PDOStatement->execute()
+#1 C:\apache\htdocs\apirest-dinamica\controllers\get.controller.php(18): GetModel::getModelFilter()
+#2 C:\apache\htdocs\apirest-dinamica\routes\services\get.php(12): GetController::getDataFilter()
+#3 C:\apache\htdocs\apirest-dinamica\routes\routes.php(29): include('...')
+#4 C:\apache\htdocs\apirest-dinamica\controllers\routes.controller.php(5): include('...')
+#5 C:\apache\htdocs\apirest-dinamica\index.php(14): RoutesController->index()
+#6 {main}
+  thrown in C:\apache\htdocs\apirest-dinamica\models\get.model.php on line 23
+[30-Dec-2024 01:43:58 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY093]: Invalid parameter number: parameter was not defined in C:\apache\htdocs\apirest-dinamica\models\get.model.php:23
+Stack trace:
+#0 C:\apache\htdocs\apirest-dinamica\models\get.model.php(23): PDOStatement->execute()
+#1 C:\apache\htdocs\apirest-dinamica\controllers\get.controller.php(18): GetModel::getModelFilter()
+#2 C:\apache\htdocs\apirest-dinamica\routes\services\get.php(12): GetController::getDataFilter()
+#3 C:\apache\htdocs\apirest-dinamica\routes\routes.php(29): include('...')
+#4 C:\apache\htdocs\apirest-dinamica\controllers\routes.controller.php(5): include('...')
+#5 C:\apache\htdocs\apirest-dinamica\index.php(14): RoutesController->index()
+#6 {main}
+  thrown in C:\apache\htdocs\apirest-dinamica\models\get.model.php on line 23
