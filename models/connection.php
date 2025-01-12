@@ -6,7 +6,7 @@
 
         static public function infoDatabase(){
             $infoDB=array(
-                "database"=>"database1",
+                "database"=>"database3",
                 "user"=>"root",
                 "pass"=>"admin"
             );

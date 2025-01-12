@@ -247,3 +247,25 @@ Stack trace:
 #5 C:\apache\htdocs\apirest-dinamica\index.php(14): RoutesController->index()
 #6 {main}
   thrown in C:\apache\htdocs\apirest-dinamica\models\get.model.php on line 39
+[12-Jan-2025 22:00:23 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'instructor_course = instructors.id_ instructor' at line 1 in C:\apache\htdocs\apirest-dinamica\models\get.model.php:143
+Stack trace:
+#0 C:\apache\htdocs\apirest-dinamica\models\get.model.php(143): PDOStatement->execute()
+#1 C:\apache\htdocs\apirest-dinamica\controllers\get.controller.php(27): GetModel::getRelData()
+#2 C:\apache\htdocs\apirest-dinamica\routes\services\get.php(22): GetController::getRelData()
+#3 C:\apache\htdocs\apirest-dinamica\routes\routes.php(29): include('...')
+#4 C:\apache\htdocs\apirest-dinamica\controllers\routes.controller.php(5): include('...')
+#5 C:\apache\htdocs\apirest-dinamica\index.php(14): RoutesController->index()
+#6 {main}
+  thrown in C:\apache\htdocs\apirest-dinamica\models\get.model.php on line 143
+[12-Jan-2025 23:12:11 UTC] PHP Warning:  Undefined array key 2 in C:\apache\htdocs\apirest-dinamica\models\get.model.php on line 109
+[12-Jan-2025 23:12:11 UTC] PHP Warning:  Undefined array key 2 in C:\apache\htdocs\apirest-dinamica\models\get.model.php on line 109
+[12-Jan-2025 23:12:12 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'database1.id_course' doesn't exist in C:\apache\htdocs\apirest-dinamica\models\get.model.php:144
+Stack trace:
+#0 C:\apache\htdocs\apirest-dinamica\models\get.model.php(144): PDOStatement->execute()
+#1 C:\apache\htdocs\apirest-dinamica\controllers\get.controller.php(27): GetModel::getRelData()
+#2 C:\apache\htdocs\apirest-dinamica\routes\services\get.php(22): GetController::getRelData()
+#3 C:\apache\htdocs\apirest-dinamica\routes\routes.php(29): include('...')
+#4 C:\apache\htdocs\apirest-dinamica\controllers\routes.controller.php(5): include('...')
+#5 C:\apache\htdocs\apirest-dinamica\index.php(14): RoutesController->index()
+#6 {main}
+  thrown in C:\apache\htdocs\apirest-dinamica\models\get.model.php on line 144
