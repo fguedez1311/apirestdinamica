@@ -235,16 +235,28 @@
         Peticiones GET para el buscador sin relaciones
         =================================================================*/
         static public function getDataSearch($table,$select,$linkTo,$search,$orderBy,$orderMode,$startAt,$endAt){
+
+            $linkToArray=explode(",",$linkTo);
+            $searchToArray=explode("_",$search);
+            $linkToText="";
+
+            if (count($linkToArray)>1){
+                foreach($linkToArray as $key => $value){
+                    if($key > 0){
+                        $linkToText.="AND ".$value." = :".$value." ";
+                    }
+                }
+            }
                /*===============================================================
             Sin Ordenar  y sin limitar datos
             =================================================================*/
-            $sql= "SELECT $select FROM $table WHERE $linkTo LIKE '%$search%'";
+            $sql= "SELECT $select FROM $table WHERE $linkToArray[0] LIKE '%$searchToArray[0]%'  $linkToText";
 
             /*===============================================================
             Ordenar datos sin límites
             =================================================================*/
             if ($orderBy!==null && $orderMode!==null && $startAt===null && $endAt===null){
-                $sql= "SELECT $select FROM $table WHERE $linkTo LIKE '%$search%' ORDER BY $orderBy $orderMode";
+                $sql= "SELECT $select FROM $table WHERE $linkToArray[0] LIKE '%$searchToArray[0]%'  $linkToText ORDER BY $orderBy $orderMode";
             }
 
             /*===============================================================
@@ -252,17 +264,23 @@
             =================================================================*/
             if($orderBy !== null && $orderMode !== null && $startAt !== null && $endAt !== null){
 
-                $sql = "SELECT $select FROM $table WHERE $linkTo LIKE '%$search%' ORDER BY $orderBy $orderMode LIMIT $startAt, $endAt";
+                $sql = "SELECT $select FROM $table WHERE $linkToArray[0] LIKE '%$searchToArray[0]%'  $linkToText ORDER BY $orderBy $orderMode LIMIT $startAt, $endAt";
     
             }
             /*===============================================================
            Limitar datos sin ordenar
             =================================================================*/
             if ($orderBy===null && $orderMode===null && $startAt!==null && $endAt!==null){
-                $sql= "SELECT $select FROM $table WHERE $linkTo LIKE '%$search%'  LIMIT $startAt,$endAt";
+                $sql= "SELECT $select FROM $table WHERE $linkToArray[0] LIKE '%$searchToArray[0]%'  $linkToText  LIMIT $startAt,$endAt";
             }
             
             $stmt=Connection::connect()->prepare($sql);
+            foreach($linkToArray as $key => $value){
+                if($key>0){
+                    $stmt->bindParam(":".$value, $searchToArray[$key],PDO::PARAM_STR);
+                }
+                
+            }
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_CLASS);
         }
