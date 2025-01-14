@@ -27,6 +27,12 @@ require_once "controllers/get.controller.php";
     else if (isset($_GET["rel"]) && isset($_GET["type"]) && $table=="relations" && isset($_GET["linkTo"]) && isset($_GET["equalTo"])){
         $response->getRelDataFilter($_GET["rel"],$_GET["type"],$select,$_GET["linkTo"],$_GET["equalTo"],$orderBy,$orderMode,$startAt,$endAt);
     }
+    /*===============================================================
+    Peticiones GET para el buscador sin relaciones
+    =================================================================*/
+    else if(isset($_GET["linkTo"]) && isset($_GET["search"])){
+        $response->getDataSearch($table,$select,$_GET["linkTo"],$_GET["search"],$orderBy,$orderMode,$startAt,$endAt);
+    }
     else{
         
     /*===============================================================
