@@ -47,6 +47,17 @@
             $return =new GetController();
             $return ->fncResponse($response);
         }
+
+         /*===============================================================
+         Peticiones GET para el buscador entre tablas relacionadas
+        =================================================================*/
+
+        static public function getRelDataSearch($rel,$type,$select,$linkTo,$search,$orderBy,$orderMode,$startAt,$endAt){
+            $response=GetModel::getRelDataSearch($rel,$type,$select,$linkTo,$search,$orderBy,$orderMode,$startAt,$endAt);
+            $return =new GetController();
+            $return ->fncResponse($response);
+        }
+
         /*===============================================================
         Respuesta del controlador
         =================================================================*/
