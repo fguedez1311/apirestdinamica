@@ -67,6 +67,7 @@
             $response=GetModel::getDataRange($table,$select,$linkTo,$between1,$between2,$orderBy,$orderMode,$startAt,$endAt);
             $return =new GetController();
             $return ->fncResponse($response);
+            
         }
 
         /*===============================================================
