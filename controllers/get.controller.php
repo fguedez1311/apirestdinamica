@@ -59,6 +59,17 @@
         }
 
         /*===============================================================
+         Peticiones GET para selección de rangos
+        =================================================================*/
+
+        static public function getDataRange($table,$select,$linkTo,$between1,$between2,$orderBy,$orderMode,$startAt,$endAt){
+            
+            $response=GetModel::getDataRange($table,$select,$linkTo,$between1,$between2,$orderBy,$orderMode,$startAt,$endAt);
+            $return =new GetController();
+            $return ->fncResponse($response);
+        }
+
+        /*===============================================================
         Respuesta del controlador
         =================================================================*/
 

@@ -39,6 +39,13 @@ require_once "controllers/get.controller.php";
     else if(isset($_GET["rel"]) && isset($_GET["type"]) && $table=="relations" && isset($_GET["linkTo"]) && isset($_GET["search"])){
         $response->getRelDataSearch($_GET["rel"],$_GET["type"],$select,$_GET["linkTo"],$_GET["search"],$orderBy,$orderMode,$startAt,$endAt);
     }
+    /*===============================================================
+    Peticiones GET para selección de rango
+    =================================================================*/
+    else if(isset($_GET["linkTo"]) && isset($_GET["between1"]) && isset($_GET["between2"])){
+        
+        $response->getDataRange($table,$select,$_GET["linkTo"],$_GET["between1"],$_GET["between2"],$orderBy,$orderMode,$startAt,$endAt);
+    }
     else{
         
     /*===============================================================
