@@ -7,6 +7,9 @@ require_once "controllers/get.controller.php";
     $orderMode=$_GET["orderMode"] ?? null;
     $startAt=$_GET["startAt"] ?? null;
     $endAt=$_GET["endAt"] ?? null;
+    $filterTo=$_GET["filterTo"] ?? null;
+    $inTo=$_GET["inTo"] ?? null;
+    
     $response=new GetController();
     
     /*===============================================================
@@ -44,7 +47,7 @@ require_once "controllers/get.controller.php";
     =================================================================*/
     else if(isset($_GET["linkTo"]) && isset($_GET["between1"]) && isset($_GET["between2"])){
         
-        $response->getDataRange($table,$select,$_GET["linkTo"],$_GET["between1"],$_GET["between2"],$orderBy,$orderMode,$startAt,$endAt);
+        $response->getDataRange($table,$select,$_GET["linkTo"],$_GET["between1"],$_GET["between2"],$orderBy,$orderMode,$startAt,$endAt,$filterTo,$inTo);
     }
     else{
         
