@@ -4,4 +4,4 @@ node_modules/
 public/build
 public/imagenes
 src/img/
-php-error.log
+.log
