@@ -1,0 +1,10 @@
+[20-Jan-2025 09:20:05 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'database1.coursis' doesn't exist in C:\Apache24\htdocs\apirest-dinamica\models\get.model.php:39
+Stack trace:
+#0 C:\Apache24\htdocs\apirest-dinamica\models\get.model.php(39): PDOStatement->execute()
+#1 C:\Apache24\htdocs\apirest-dinamica\controllers\get.controller.php(9): GetModel::getData()
+#2 C:\Apache24\htdocs\apirest-dinamica\routes\services\get.php(64): GetController::getData()
+#3 C:\Apache24\htdocs\apirest-dinamica\routes\routes.php(29): include('...')
+#4 C:\Apache24\htdocs\apirest-dinamica\controllers\routes.controller.php(5): include('...')
+#5 C:\Apache24\htdocs\apirest-dinamica\index.php(14): RoutesController->index()
+#6 {main}
+  thrown in C:\Apache24\htdocs\apirest-dinamica\models\get.model.php on line 39

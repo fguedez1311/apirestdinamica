@@ -3,11 +3,17 @@
 
     class GetModel{
         
+        
         /*===============================================================
         Peticiones GET sin filtro
         =================================================================*/
         static public function getData($table,$select,$orderBy,$orderMode,$startAt,$endAt){
-           
+            /*===============================================================
+            Validar existencia de la tabla
+            =================================================================*/
+            if (empty(Connection::getColumnData($table))){
+                return null;
+            }
             /*===============================================================
             Sin Ordenar  y sin limitar datos
             =================================================================*/
@@ -44,7 +50,12 @@
         Peticiones GET con filtro 
         =================================================================*/
         static public function getDataFilter($table,$select,$linkTo,$equalTo,$orderBy,$orderMode,$startAt,$endAt){
-
+             /*===============================================================
+            Validar existencia de la tabla
+            =================================================================*/
+            if (empty(Connection::getColumnData($table))){
+                return null;
+            }
             $linkToArray=explode(",",$linkTo);
             $equalToArray=explode("_",$equalTo);
             $linkToText="";
@@ -105,6 +116,12 @@
             
             if (count($relArray)>1){
                 foreach($relArray as $key => $value){
+                     /*===============================================================
+                        Validar existencia de la tabla
+                    =================================================================*/
+                    if (empty(Connection::getColumnData($value))){
+                        return null;
+                    }
                     if($key > 0){
                         $innerJoinText.="INNER JOIN ". $value." ON ".$relArray[0].".id_".$typeArray[$key]."_".$typeArray[0]." = ". $value.".id_".$typeArray[$key]." ";
                     }
@@ -163,6 +180,12 @@
 
             if (count($linkToArray)>1){
                 foreach($linkToArray as $key => $value){
+                     /*===============================================================
+                        Validar existencia de la tabla
+                    =================================================================*/
+                    if (empty(Connection::getColumnData($value))){
+                        return null;
+                    }
                     if($key > 0){
                         $linkToText.="AND ".$value." = :".$value." ";
                     }
@@ -235,7 +258,12 @@
         Peticiones GET para el buscador sin relaciones
         =================================================================*/
         static public function getDataSearch($table,$select,$linkTo,$search,$orderBy,$orderMode,$startAt,$endAt){
-
+            /*===============================================================
+                        Validar existencia de la tabla
+            =================================================================*/
+            if (empty(Connection::getColumnData($table))){
+                return null;
+            }
             $linkToArray=explode(",",$linkTo);
             $searchToArray=explode("_",$search);
             $linkToText="";
@@ -298,6 +326,12 @@
 
             if (count($linkToArray)>1){
                 foreach($linkToArray as $key => $value){
+                     /*===============================================================
+                        Validar existencia de la tabla
+                    =================================================================*/
+                    if (empty(Connection::getColumnData($value))){
+                        return null;
+                    }
                     if($key > 0){
                         $linkToText.="AND ".$value." = :".$value." ";
                     }
@@ -374,7 +408,12 @@
         =================================================================*/
 
         static public function getDataRange($table,$select,$linkTo,$between1,$between2,$orderBy,$orderMode,$startAt,$endAt,$filterTo,$inTo){
-            
+            /*===============================================================
+                    Validar existencia de la tabla
+            =================================================================*/
+            if (empty(Connection::getColumnData($table))){
+                return null;
+            }
             $filter="";
            
             if ($filterTo!=null && $inTo!=null){
@@ -435,6 +474,12 @@
             
             if (count($relArray)>1){
                 foreach($relArray as $key => $value){
+                    /*===============================================================
+                        Validar existencia de la tabla
+                    =================================================================*/
+                    if (empty(Connection::getColumnData($value))){
+                        return null;
+                    }
                     if($key > 0){
                         $innerJoinText.="INNER JOIN ". $value." ON ".$relArray[0].".id_".$typeArray[$key]."_".$typeArray[0]." = ". $value.".id_".$typeArray[$key]." ";
                     }
