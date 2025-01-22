@@ -9,7 +9,7 @@ use FTP\Connection as FTPConnection;
 
         static public function infoDatabase(){
             $infoDB=array(
-                "database"=>"database1",
+                "database"=>"database2",
                 "user"=>"root",
                 "pass"=>"admin"
             );
@@ -36,10 +36,44 @@ use FTP\Connection as FTPConnection;
         /*===============================================================
         Validar existencia de una tabla en la BD
         =================================================================*/
-        static public function getColumnData($table){
+        static public function getColumnData($table,$columns){
+            /*===============================================================
+            Traer el nombre de la BD
+            =================================================================*/
             $database=Connection::infoDatabase()["database"];
-            return Connection::connect()
+
+            /*===============================================================
+            Traer Todas las columnas de una tabla
+            =================================================================*/
+            $validate= Connection::connect()
                    ->query("SELECT COLUMN_NAME AS item FROM information_schema.columns WHERE table_schema='$database' AND table_name='$table'")
                    ->fetchAll(PDO::FETCH_OBJ);
+            
+            /*===============================================================
+            Validamos la existencia de la tabla
+            =================================================================*/
+            if (empty($validate)){
+                return null;
+            }
+            else{
+                /*===============================================================
+                Ajuste a solicitud de columnas globales
+                =================================================================*/
+                if ($columns[0]=="*"){
+                    array_shift($columns);
+                }
+                /*===============================================================
+                Validamos la existencia de columnas
+                =================================================================*/
+                $sum=0;
+                foreach ($validate as $key => $value) {
+                    
+                    $sum+=(in_array($value->item,$columns));                    
+                        
+                }
+                return $sum==count($columns) ? $validate:null;
+                
+            }
+
         }
     }

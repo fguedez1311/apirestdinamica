@@ -9,9 +9,11 @@
         =================================================================*/
         static public function getData($table,$select,$orderBy,$orderMode,$startAt,$endAt){
             /*===============================================================
-            Validar existencia de la tabla
+            Validar existencia de la tabla y de las columnas
             =================================================================*/
-            if (empty(Connection::getColumnData($table))){
+            $selectArray=explode(",",$select);
+            
+            if (empty(Connection::getColumnData($table,$selectArray))){
                 return null;
             }
             /*===============================================================
@@ -42,7 +44,11 @@
             }
             
             $stmt=Connection::connect()->prepare($sql);
-            $stmt->execute();
+            try {
+                $stmt->execute();
+            } catch (PDOException $exception) {
+                return null;
+            }
             return $stmt->fetchAll(PDO::FETCH_CLASS);
         }
 
@@ -50,13 +56,21 @@
         Peticiones GET con filtro 
         =================================================================*/
         static public function getDataFilter($table,$select,$linkTo,$equalTo,$orderBy,$orderMode,$startAt,$endAt){
-             /*===============================================================
-            Validar existencia de la tabla
+           /*===============================================================
+            Validar existencia de la tabla y de las columnas
             =================================================================*/
-            if (empty(Connection::getColumnData($table))){
+            $linkToArray=explode(",",$linkTo);
+            $selectArray=explode(",",$select);
+
+            foreach ($linkToArray as $key => $value) {
+                array_push($selectArray,$value);
+            }
+            $selectArray=array_unique($selectArray);
+
+            if (empty(Connection::getColumnData($table,$selectArray))){
                 return null;
             }
-            $linkToArray=explode(",",$linkTo);
+           
             $equalToArray=explode("_",$equalTo);
             $linkToText="";
 
@@ -101,7 +115,11 @@
             }
             
            
-            $stmt->execute();
+            try {
+                $stmt->execute();
+            } catch (PDOException $exception) {
+                return null;
+            }
             return $stmt->fetchAll(PDO::FETCH_CLASS);
         }
 
@@ -119,7 +137,7 @@
                      /*===============================================================
                         Validar existencia de la tabla
                     =================================================================*/
-                    if (empty(Connection::getColumnData($value))){
+                    if (empty(Connection::getColumnData($value,["*"]))){
                         return null;
                     }
                     if($key > 0){
@@ -158,7 +176,12 @@
                 
                 
                 $stmt=Connection::connect()->prepare($sql);
-                $stmt->execute();
+                try {
+                    $stmt->execute();
+                } catch (PDOException $exception) {
+                    return null;
+                }
+                
                 return $stmt->fetchAll(PDO::FETCH_CLASS);
             }
             else{
@@ -167,7 +190,7 @@
         
         }
          /*===============================================================
-        Peticiones GET con filtro entre tablas relacionadas
+        Peticiones GET con filtros entre tablas relacionadas
         =================================================================*/
         static public function getRelDataFilter($rel,$type,$select,$linkTo,$equalTo,$orderBy,$orderMode,$startAt,$endAt){
             
@@ -180,12 +203,7 @@
 
             if (count($linkToArray)>1){
                 foreach($linkToArray as $key => $value){
-                     /*===============================================================
-                        Validar existencia de la tabla
-                    =================================================================*/
-                    if (empty(Connection::getColumnData($value))){
-                        return null;
-                    }
+                    
                     if($key > 0){
                         $linkToText.="AND ".$value." = :".$value." ";
                     }
@@ -204,6 +222,12 @@
             
             if (count($relArray)>1){
                 foreach($relArray as $key => $value){
+                     /*===============================================================
+                        Validar existencia de la tabla
+                    =================================================================*/
+                    if (empty(Connection::getColumnData($value,["*"]))){
+                        return null;
+                    }
                     if($key > 0){
                         $innerJoinText.="INNER JOIN ". $value." ON ".$relArray[0].".id_".$typeArray[$key]."_".$typeArray[0]." = ". $value.".id_".$typeArray[$key]." ";
                     }
@@ -246,7 +270,11 @@
                     $stmt->bindParam(":".$value, $equalToArray[$key],PDO::PARAM_STR);
                 }
                 
-                $stmt->execute();
+                try {
+                    $stmt->execute();
+                } catch (PDOException $exception) {
+                    return null;
+                }
                 return $stmt->fetchAll(PDO::FETCH_CLASS);
             }
             else{
@@ -257,14 +285,23 @@
         /*===============================================================
         Peticiones GET para el buscador sin relaciones
         =================================================================*/
-        static public function getDataSearch($table,$select,$linkTo,$search,$orderBy,$orderMode,$startAt,$endAt){
+        static public function getDataSearch($table,$select,$linkTo,$search,$orderBy,$orderMode,$startAt,$endAt){   
             /*===============================================================
-                        Validar existencia de la tabla
+                        Validar existencia de la tabla y de las columnas
             =================================================================*/
-            if (empty(Connection::getColumnData($table))){
+            $linkToArray = explode(",",$linkTo);
+            $selectArray=explode(",",$select);
+            foreach ($linkToArray  as $key => $value) {
+                array_push($selectArray, $value);
+            }
+            $selectArray=array_unique($selectArray);
+
+            if (empty(Connection::getColumnData($table,$selectArray))){
                 return null;
             }
-            $linkToArray=explode(",",$linkTo);
+           
+
+           
             $searchToArray=explode("_",$search);
             $linkToText="";
 
@@ -309,7 +346,11 @@
                 }
                 
             }
-            $stmt->execute();
+            try {
+                $stmt->execute();
+            } catch (PDOException $exception) {
+                return null;
+            }
             return $stmt->fetchAll(PDO::FETCH_CLASS);
         }
          /*===============================================================
@@ -326,12 +367,7 @@
 
             if (count($linkToArray)>1){
                 foreach($linkToArray as $key => $value){
-                     /*===============================================================
-                        Validar existencia de la tabla
-                    =================================================================*/
-                    if (empty(Connection::getColumnData($value))){
-                        return null;
-                    }
+                   
                     if($key > 0){
                         $linkToText.="AND ".$value." = :".$value." ";
                     }
@@ -343,7 +379,7 @@
             Organizamos las relaciones
             =================================================================*/
             $relArray=explode(",",$rel);
-            $typeArray=explode(",",$type);
+            $typeArray=explode(",",$type);      
 
             $innerJoinText="";
 
@@ -351,6 +387,12 @@
             
             if (count($relArray)>1){
                 foreach($relArray as $key => $value){
+                      /*===============================================================
+                        Validar existencia de la tabla y columnas
+                    =================================================================*/
+                    if (empty(Connection::getColumnData($value,["*"]))){
+                        return null;
+                    }
                     if($key > 0){
                         $innerJoinText.="INNER JOIN ". $value." ON ".$relArray[0].".id_".$typeArray[$key]."_".$typeArray[0]." = ". $value.".id_".$typeArray[$key]." ";
                     }
@@ -394,7 +436,11 @@
                         $stmt->bindParam(":".$value, $searchToArray[$key],PDO::PARAM_STR);
                     }
                 }
-                $stmt->execute();
+                try {
+                    $stmt->execute();
+                } catch (PDOException $exception) {
+                    return null;
+                }
 
                 return $stmt->fetchAll(PDO::FETCH_CLASS);
             }
@@ -408,18 +454,42 @@
         =================================================================*/
 
         static public function getDataRange($table,$select,$linkTo,$between1,$between2,$orderBy,$orderMode,$startAt,$endAt,$filterTo,$inTo){
-            /*===============================================================
-                    Validar existencia de la tabla
-            =================================================================*/
-            if (empty(Connection::getColumnData($table))){
-                return null;
+            /*=============================================
+            Validar existencia de la tabla y de las columnas
+            =============================================*/
+
+            $linkToArray = explode(",",$linkTo);
+
+            if($filterTo != null){
+                $filterToArray = explode(",",$filterTo);
+            }else{
+                $filterToArray =array();
             }
+            
+            $selectArray = explode(",",$select);
+
+            foreach ($linkToArray  as $key => $value) {
+                array_push($selectArray, $value);
+            }
+
+            foreach ($filterToArray  as $key => $value) {
+                array_push($selectArray, $value);
+            }
+
+		    $selectArray = array_unique($selectArray);
+
             $filter="";
            
             if ($filterTo!=null && $inTo!=null){
                 
                 $filter=' AND '. $filterTo.' IN ('.$inTo.')';
             }
+            if(empty(Connection::getColumnData($table,$selectArray ))){
+			
+                return null;
+    
+            }
+
            
              /*===============================================================
             Sin Ordenar  y sin limitar datos
@@ -451,7 +521,11 @@
            
             
             $stmt=Connection::connect()->prepare($sql);
-            $stmt->execute();
+            try {
+                $stmt->execute();
+            } catch (PDOException $exception) {
+                return null;
+            }
             return $stmt->fetchAll(PDO::FETCH_CLASS);
         }
 
@@ -461,6 +535,20 @@
 
         static public function getRelDataRange($rel,$type,$select,$linkTo,$between1,$between2,$orderBy,$orderMode,$startAt,$endAt,$filterTo,$inTo){
             
+
+            
+            /*=============================================
+            Validar existencia de la tabla y de las columnas
+            =============================================*/
+
+            $linkToArray = explode(",",$linkTo);
+            
+            if($filterTo != null){
+                $filterToArray = explode(",",$filterTo);
+            }else{
+                $filterToArray =array();
+            }
+
             $filter="";
            
             if ($filterTo!=null && $inTo!=null){
@@ -477,7 +565,7 @@
                     /*===============================================================
                         Validar existencia de la tabla
                     =================================================================*/
-                    if (empty(Connection::getColumnData($value))){
+                    if (empty(Connection::getColumnData($value,["*"]))){
                         return null;
                     }
                     if($key > 0){
@@ -513,7 +601,11 @@
                     $sql= "SELECT $select FROM $relArray[0] $innerJoinText WHERE $linkTo BETWEEN '$between1' AND '$between2' $filter  LIMIT $startAt,$endAt";
                 }
                 $stmt=Connection::connect()->prepare($sql);
-                $stmt->execute();
+                try {
+                    $stmt->execute();
+                } catch (PDOException $exception) {
+                    return null;
+                }
                 return $stmt->fetchAll(PDO::FETCH_CLASS);
             }
             else{
