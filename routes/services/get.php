@@ -1,6 +1,6 @@
 <?php
 require_once "controllers/get.controller.php";
-    $table=explode("?",$routesArray[1])[0];
+    
     
     $select=$_GET["select"] ?? "*";
     $orderBy=$_GET["orderBy"] ?? null;

@@ -99,7 +99,8 @@
             else{
                 $json=array(
                     'status'=>404,
-                    'results'=>'NotFound'
+                    'results'=>'NotFound',
+                    'method'=>'Get'
                 
                 );
             }

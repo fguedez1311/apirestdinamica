@@ -9,7 +9,7 @@ use FTP\Connection as FTPConnection;
 
         static public function infoDatabase(){
             $infoDB=array(
-                "database"=>"database2",
+                "database"=>"database1",
                 "user"=>"root",
                 "pass"=>"admin"
             );
@@ -41,7 +41,7 @@ use FTP\Connection as FTPConnection;
             Traer el nombre de la BD
             =================================================================*/
             $database=Connection::infoDatabase()["database"];
-
+            
             /*===============================================================
             Traer Todas las columnas de una tabla
             =================================================================*/
