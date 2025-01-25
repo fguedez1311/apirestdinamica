@@ -28,3 +28,12 @@ Stack trace:
 #5 C:\Apache24\htdocs\apirest-dinamica\index.php(14): RoutesController->index()
 #6 {main}
   thrown in C:\Apache24\htdocs\apirest-dinamica\models\get.model.php on line 171
+[24-Jan-2025 10:45:52 UTC] PHP Warning:  file_get_contents(php:/input): Failed to open stream: No such file or directory in C:\Apache24\htdocs\apirest-dinamica\routes\services\put.php on line 8
+[24-Jan-2025 10:59:11 UTC] PHP Warning:  require_once(connection.php): Failed to open stream: No such file or directory in C:\Apache24\htdocs\apirest-dinamica\routes\services\put.php on line 2
+[24-Jan-2025 10:59:11 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 'connection.php' (include_path='.;C:\php\pear') in C:\Apache24\htdocs\apirest-dinamica\routes\services\put.php:2
+Stack trace:
+#0 C:\Apache24\htdocs\apirest-dinamica\routes\routes.php(44): include()
+#1 C:\Apache24\htdocs\apirest-dinamica\controllers\routes.controller.php(5): include('...')
+#2 C:\Apache24\htdocs\apirest-dinamica\index.php(14): RoutesController->index()
+#3 {main}
+  thrown in C:\Apache24\htdocs\apirest-dinamica\routes\services\put.php on line 2
