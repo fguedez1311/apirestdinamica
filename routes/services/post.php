@@ -23,6 +23,7 @@
             /*===============================================================
             Solicitamos respuesta del controlador para crear datos en cualquier tabla
             =================================================================*/
+            $response=new PostController();
             $response=PostController::postData($table,$_POST);
             
             

@@ -37,3 +37,5 @@ Stack trace:
 #2 C:\Apache24\htdocs\apirest-dinamica\index.php(14): RoutesController->index()
 #3 {main}
   thrown in C:\Apache24\htdocs\apirest-dinamica\routes\services\put.php on line 2
+[25-Jan-2025 13:08:41 UTC] PHP Warning:  Undefined variable $columns in C:\Apache24\htdocs\apirest-dinamica\routes\services\delete.php on line 12
+[25-Jan-2025 13:11:18 UTC] PHP Warning:  Undefined variable $columns in C:\Apache24\htdocs\apirest-dinamica\routes\services\delete.php on line 12

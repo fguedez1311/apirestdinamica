@@ -1,15 +1,15 @@
 
 <?php
 
-    require_once 'models/put.model.php';
-    class PutController{
+    require_once 'models/delete.model.php';
+    class DeleteController{
 
         /*===============================================================
-        Petición PUT para actualizar datos
+        Petición DELETE para eliminar datos
         =================================================================*/
-        static public function putData($table,$data,$id,$nameId){
-            $response=PutModel::putData($table,$data,$id,$nameId);
-            $return =new PutController();
+        static public function deleteData($table,$id,$nameId){
+            $response=DeleteModel::deleteData($table,$id,$nameId);
+            $return =new DeleteController();
             $return ->fncResponse($response);
         }
          /*===============================================================
@@ -29,7 +29,7 @@
                 $json=array(
                     'status'=>404,
                     'results'=>'NotFound',
-                    'method'=>'put'
+                    'method'=>'delete'
                 
                 );
             }
