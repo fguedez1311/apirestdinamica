@@ -39,3 +39,18 @@ Stack trace:
   thrown in C:\Apache24\htdocs\apirest-dinamica\routes\services\put.php on line 2
 [25-Jan-2025 13:08:41 UTC] PHP Warning:  Undefined variable $columns in C:\Apache24\htdocs\apirest-dinamica\routes\services\delete.php on line 12
 [25-Jan-2025 13:11:18 UTC] PHP Warning:  Undefined variable $columns in C:\Apache24\htdocs\apirest-dinamica\routes\services\delete.php on line 12
+[26-Jan-2025 13:29:17 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method PostController::postRegister() in C:\Apache24\htdocs\apirest-dinamica\routes\services\post.php:31
+Stack trace:
+#0 C:\Apache24\htdocs\apirest-dinamica\routes\routes.php(37): include()
+#1 C:\Apache24\htdocs\apirest-dinamica\controllers\routes.controller.php(5): include('...')
+#2 C:\Apache24\htdocs\apirest-dinamica\index.php(14): RoutesController->index()
+#3 {main}
+  thrown in C:\Apache24\htdocs\apirest-dinamica\routes\services\post.php on line 31
+[26-Jan-2025 13:39:24 UTC] PHP Fatal error:  Uncaught TypeError: count(): Argument #1 ($value) must be of type Countable|array, string given in C:\Apache24\htdocs\apirest-dinamica\controllers\post.controller.php:21
+Stack trace:
+#0 C:\Apache24\htdocs\apirest-dinamica\routes\services\post.php(31): PostController::postRegister()
+#1 C:\Apache24\htdocs\apirest-dinamica\routes\routes.php(37): include('...')
+#2 C:\Apache24\htdocs\apirest-dinamica\controllers\routes.controller.php(5): include('...')
+#3 C:\Apache24\htdocs\apirest-dinamica\index.php(14): RoutesController->index()
+#4 {main}
+  thrown in C:\Apache24\htdocs\apirest-dinamica\controllers\post.controller.php on line 21

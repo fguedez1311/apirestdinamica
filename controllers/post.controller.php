@@ -12,6 +12,21 @@
             $return ->fncResponse($response);
         }
          /*===============================================================
+        Petición POST para registrar datos
+        =================================================================*/
+        static public function postRegister($table,$data,$suffix){
+            if (isset($data["password_".$suffix]) && $data["password_".$suffix]!=null){
+                $crypt=crypt($data["password_".$suffix],'$2a$07$franomesillystringforsalt$');
+                $data["password_".$suffix]=$crypt;
+               
+                $response=PostModel::postData($table,$data);
+                $return =new PostController();
+                $return ->fncResponse($response);
+                
+                
+            }
+        }
+         /*===============================================================
         Respuesta del controlador
         =================================================================*/
 

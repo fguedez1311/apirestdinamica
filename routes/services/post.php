@@ -20,11 +20,25 @@
                 echo json_encode($json,http_response_code($json["status"]));
                 return;
             }
-            /*===============================================================
-            Solicitamos respuesta del controlador para crear datos en cualquier tabla
-            =================================================================*/
+
             $response=new PostController();
-            $response=PostController::postData($table,$_POST);
+
+            /*===============================================================
+            Petición Post para un registro de usuario
+            =================================================================*/
+            if (isset($_GET["register"]) && $_GET["register"]==true){
+                $suffix=$_GET["suffix"] ?? "user";
+                $response=PostController::postRegister($table,$_POST,$suffix);
+            }
+            else{
+
+                /*===============================================================
+                Solicitamos respuesta del controlador para crear datos en cualquier tabla
+                =================================================================*/
+               
+                $response=PostController::postData($table,$_POST);
+
+            }
             
             
         }
