@@ -1,6 +1,6 @@
 <?php
 
-use FTP\Connection as FTPConnection;
+    
 
     class Connection{
         /*===============================================================
@@ -75,5 +75,23 @@ use FTP\Connection as FTPConnection;
                 
             }
 
+        }
+
+        /*===============================================================
+        Generar Token de autenticación
+        =================================================================*/
+        static public function jwt($id,$email){
+           $time=time();
+           $token=array(
+                "iat"=>$time,  //Tiempo que inicia el token
+                "exp"=>$time+(60*60*24),
+                "data"=>[
+                    "id"=>$id,
+                    "email"=>$email,
+                ]
+
+           );
+           
+           return $token;
         }
     }

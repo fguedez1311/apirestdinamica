@@ -10,7 +10,9 @@
             /*===============================================================
             Validar el id
             =================================================================*/
+           
             $response=GetModel::getDataFilter($table,$nameId,$nameId,$id,null,null,null,null);
+
             if (empty($response)){
               
               return null;
@@ -26,7 +28,7 @@
             $set=substr($set,0,-1);
             
             $sql="UPDATE $table SET $set WHERE $nameId = :$nameId";
-
+           
             $link=Connection::connect();
             $stmt=$link->prepare($sql);
             foreach ($data as $key => $value) {
