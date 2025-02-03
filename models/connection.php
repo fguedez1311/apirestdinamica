@@ -1,7 +1,7 @@
 <?php
 
     
-
+    require_once "get.model.php";
     class Connection{
         /*===============================================================
         Información de la Base de datos
@@ -93,5 +93,27 @@
            );
            
            return $token;
+        }
+        /*===============================================================
+        Validar el token de seguridad
+        =================================================================*/
+        static public function tokenValidate($token,$table,$suffix){
+            $user=GetModel::getDataFilter($table,"token_exp_".$suffix,"token_".$suffix,$token,null,null,null,null);
+           
+            if (!empty($user)){
+                /*===============================================================
+                Validamos que el token no haya expirado
+                =================================================================*/
+                $time=time();
+                if($user[0]->{"token_exp_".$suffix}>$time){
+                    return "ok";
+                }
+                else{
+                    return "expired";
+                }
+            }
+            else{
+                return "no-auth";
+            }
         }
     }

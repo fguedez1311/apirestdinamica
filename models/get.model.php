@@ -71,7 +71,7 @@
                 return null;
             }
            
-            $equalToArray=explode("_",$equalTo);
+            $equalToArray=explode(",",$equalTo);
             $linkToText="";
 
             if (count($linkToArray)>1){
@@ -198,7 +198,7 @@
             Organizamos los filtros
             =================================================================*/
             $linkToArray=explode(",",$linkTo);
-            $equalToArray=explode("_",$equalTo);
+            $equalToArray=explode(",",$equalTo);
             $linkToText="";
 
             if (count($linkToArray)>1){
@@ -302,7 +302,7 @@
            
 
            
-            $searchToArray=explode("_",$search);
+            $searchToArray=explode(",",$search);
             $linkToText="";
 
             if (count($linkToArray)>1){
@@ -362,7 +362,7 @@
             Organizamos los filtros
             =================================================================*/
             $linkToArray=explode(",",$linkTo);
-            $searchToArray=explode("_",$search);
+            $searchToArray=explode(",",$search);
             $linkToText="";
 
             if (count($linkToArray)>1){
