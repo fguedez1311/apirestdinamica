@@ -1,5 +1,5 @@
 <?php
-   
+   require_once 'models/connection.php';
    $routesArray=explode("/",$_SERVER['REQUEST_URI']);
    $routesArray=array_filter($routesArray);
 
@@ -23,6 +23,20 @@
    if (count($routesArray)==1 && isset($_SERVER['REQUEST_METHOD'])){
 
         $table=explode("?",$routesArray[1])[0];
+        /*===============================================================
+        Validar llave secreta
+        =================================================================*/
+        if (!isset(getallheaders()["Authorization"]) || getallheaders()["Authorization"]!=Connection::apikey() ){
+            $json=array(
+                'status'=>404,
+                'result'=>'Not found'
+            
+            );
+            echo json_encode($json,http_response_code($json["status"]));
+            return;
+        }
+
+        
         /*===============================================================
         Petición de Tipo GET
         =================================================================*/
