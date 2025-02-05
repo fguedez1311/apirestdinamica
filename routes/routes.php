@@ -1,5 +1,6 @@
 <?php
    require_once 'models/connection.php';
+   require_once 'controllers/get.controller.php';
    $routesArray=explode("/",$_SERVER['REQUEST_URI']);
    $routesArray=array_filter($routesArray);
 
@@ -27,13 +28,25 @@
         Validar llave secreta
         =================================================================*/
         if (!isset(getallheaders()["Authorization"]) || getallheaders()["Authorization"]!=Connection::apikey() ){
-            $json=array(
-                'status'=>404,
-                'result'=>'Not found'
-            
-            );
-            echo json_encode($json,http_response_code($json["status"]));
-            return;
+
+            if (in_array($table,Connection::publicAccess())==0){
+                $json=array(
+                    'status'=>404,
+                    'result'=>'You are not authorized to make request'
+                
+                );
+                echo json_encode($json,http_response_code($json["status"]));
+                return;
+            }
+            else{
+                /*===============================================================
+                Acceso Publico
+                =================================================================*/
+                $response=new GetController();
+                $response->getData($table,"*",null,null,null,null);
+                return;
+
+            }
         }
 
         
